@@ -18,8 +18,11 @@ const tema = {
         neutras: {
             a: '#373737',
             b: '',
-            c: '',
+            c: '#f5f5f5',
             d: ''
+        },
+        light: {
+            b: '#fdf8f8'
         },
         dark: {
             a: '',

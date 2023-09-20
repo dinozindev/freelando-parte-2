@@ -49,10 +49,6 @@ const estadosBrasileiros = [
 
 const PaginaInicial = () => {
 
-  for (let i = 0; i < 50; i++) {
-
-  }
-
   return (
     <ProvedorTema>
       <Estilos />
