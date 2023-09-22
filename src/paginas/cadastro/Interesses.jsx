@@ -1,9 +1,9 @@
-import { useState } from "react";
 import GrupoRadio from "../../componentes/GrupoRadio/GrupoRadio";
 import { Col, Row } from "react-grid-system";
 import { Botao } from "../../componentes/Botao/Botao";
 import { Link } from "react-router-dom";
 import CabecalhoCadastro from "./CabecalhoCadastro";
+import { useCadastroUsuarioContext } from "../../context/CadastroUsuario";
 
 const opcoes = [
     {
@@ -33,13 +33,16 @@ const opcoes = [
 ]
 
 const Interesses = () => {
-    const [opcao, setOpcao] = useState('');
+    // const [opcao, setOpcao] = useState('');
+
+    // ao invés de usar o hook do useState, estaremos usando o usuario como estado, e a function setInteresse como setter para este estado. Quando uma opção for selecionada, atualiza o estado atual da propriedade interesse do usuario. 
+    const {usuario, setInteresse} = useCadastroUsuarioContext();
 
     return (
         <>
             <CabecalhoCadastro titulo="Crie seu cadastro" subtitulo="Qual a área de interesse?"/>
             <div style={{ textAlign: 'center' }}>
-                <GrupoRadio opcoes={opcoes} valor={opcao} onChange={setOpcao} />
+                <GrupoRadio opcoes={opcoes} valor={usuario.interesse} onChange={setInteresse} />
                 <Row style={{ paddingTop: '32px' }}>
                     <Col lg={6} md={6} sm={6}>
                         <div style={{ textAlign: 'left' }}>
