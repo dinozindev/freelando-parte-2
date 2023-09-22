@@ -1,9 +1,9 @@
 import { useState } from "react";
 import GrupoRadio from "../../componentes/GrupoRadio/GrupoRadio";
-import { Tipografia } from "../../componentes/Tipografia/Tipografia";
 import { Col, Row } from "react-grid-system";
 import { Botao } from "../../componentes/Botao/Botao";
 import { Link } from "react-router-dom";
+import CabecalhoCadastro from "./CabecalhoCadastro";
 
 const opcoes = [
     {
@@ -37,13 +37,8 @@ const Interesses = () => {
 
     return (
         <>
+            <CabecalhoCadastro titulo="Crie seu cadastro" subtitulo="Qual a área de interesse?"/>
             <div style={{ textAlign: 'center' }}>
-                <Tipografia variante="h1" componente="h1">
-                    Crie seu cadastro
-                </Tipografia>
-                <Tipografia variante="h3" componente="h2">
-                    Qual a área de interesse?
-                </Tipografia>
                 <GrupoRadio opcoes={opcoes} valor={opcao} onChange={setOpcao} />
                 <Row style={{ paddingTop: '32px' }}>
                     <Col lg={6} md={6} sm={6}>

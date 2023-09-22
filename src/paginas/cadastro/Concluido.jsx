@@ -1,8 +1,8 @@
 import styled from "@emotion/styled"
-import { Tipografia } from "../../componentes/Tipografia/Tipografia"
 import clienteConcluido from "./assets/cliente-concluido.png"
 import { Botao } from "../../componentes/Botao/Botao"
 import { Link } from "react-router-dom"
+import CabecalhoCadastro from "./CabecalhoCadastro"
 
 const ContainerConcluido = styled.div`
     padding: 0 ${props => props.theme.espacamentos.l};
@@ -20,12 +20,7 @@ const Concluido = () => {
     return (
         <>
             <ContainerConcluido>
-                <Tipografia variante="h1" componente="h1">
-                    Seu perfil está completo!
-                </Tipografia>
-                <Tipografia variante="body" componente="body">
-                    Agora é só começar a se conectar com os melhores freelancers do mercado!
-                </Tipografia>
+                <CabecalhoCadastro titulo="Seu perfil está completo!" descricao="Agora é só começar a se conectar com os melhores freelancers do mercado!"/>
                 <ImageConcluido src={clienteConcluido} alt="cliente concluido" />
                 <Link to=".."> 
                     <Botao variante="secundaria">
