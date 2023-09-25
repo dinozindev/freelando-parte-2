@@ -39,7 +39,16 @@ const estadosBrasileiros = [
 
 const DadosPessoais = () => {
 
-    const {usuario, setNomeCompleto, setCidade, setEmail, setSenha, setSenhaConfirmada, setUf, submeterUsuario} = useCadastroUsuarioContext();
+    const {
+        usuario, 
+        setNomeCompleto, 
+        setCidade, 
+        setEmail, 
+        setSenha, 
+        setSenhaConfirmada, 
+        setUf, 
+        submeterUsuario
+    } = useCadastroUsuarioContext();
 
     const finalizarCadastro = (e) => {
         e.preventDefault();

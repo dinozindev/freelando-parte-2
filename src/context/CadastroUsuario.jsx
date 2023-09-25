@@ -14,6 +14,9 @@ const usuarioInicial = {
 
 export const CadastroUsuarioContext = createContext({
     usuario: usuarioInicial,
+    erros: {
+        senhaErro: ''
+    },
     setPerfil: () => null,
     setInteresse: () => null,
     setNomeCompleto: () => null,
@@ -22,7 +25,8 @@ export const CadastroUsuarioContext = createContext({
     setEmail: () => null,
     setSenha: () => null,
     setSenhaConfirmada: () => null,
-    submeterUsuario: () => null
+    submeterUsuario: () => null,
+    possoSelecionarInteresse: () => null
 });
 
 export const useCadastroUsuarioContext = () => {
@@ -101,8 +105,15 @@ export const CadastroUsuarioProvider = ({ children }) => {
         })
     }
     const submeterUsuario = () => {
+        if (usuario.senha.length < 8) {
+            return
+        }
         console.log(usuario);
         navigate('/cadastro/concluido');
+    }
+    const possoSelecionarInteresse = () => {
+        // se o usuario.perfil for uma string vazia (undefined), retorna false. Caso contrário, retorna true. 
+        return !!usuario.perfil
     }
 
     const context = {
@@ -115,7 +126,8 @@ export const CadastroUsuarioProvider = ({ children }) => {
         setEmail,
         setSenha,
         setSenhaConfirmada,
-        submeterUsuario
+        submeterUsuario,
+        possoSelecionarInteresse
     }
     return (
         <CadastroUsuarioContext.Provider value={context}>

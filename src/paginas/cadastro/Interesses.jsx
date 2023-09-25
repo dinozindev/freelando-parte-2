@@ -1,9 +1,10 @@
 import GrupoRadio from "../../componentes/GrupoRadio/GrupoRadio";
 import { Col, Row } from "react-grid-system";
 import { Botao } from "../../componentes/Botao/Botao";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CabecalhoCadastro from "./CabecalhoCadastro";
 import { useCadastroUsuarioContext } from "../../context/CadastroUsuario";
+import { useEffect } from "react";
 
 const opcoes = [
     {
@@ -36,7 +37,16 @@ const Interesses = () => {
     // const [opcao, setOpcao] = useState('');
 
     // ao invés de usar o hook do useState, estaremos usando o usuario como estado, e a function setInteresse como setter para este estado. Quando uma opção for selecionada, atualiza o estado atual da propriedade interesse do usuario. 
-    const {usuario, setInteresse} = useCadastroUsuarioContext();
+    const {usuario, setInteresse, possoSelecionarInteresse} = useCadastroUsuarioContext();
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // enquanto possoSelecionarInteresse não retornar true, navega de volta para a página de cadastro, já que o perfil ainda não foi selecionado. 
+        if(!possoSelecionarInteresse()) {
+            navigate('/cadastro');
+        }
+    }, [navigate, possoSelecionarInteresse])
 
     return (
         <>
