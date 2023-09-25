@@ -1,11 +1,12 @@
 // import { Tipografia } from "../../componentes/Tipografia/Tipografia";
 import { Col, Row } from "react-grid-system";
 import { Botao } from "../../componentes/Botao/Botao";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CampoTexto } from "../../componentes/CampoTexto/CampoTexto";
 import { ListaSupensa } from "../../componentes/ListaSuspensa/ListaSuspensa";
 import CabecalhoCadastro from "./CabecalhoCadastro";
 import { useCadastroUsuarioContext } from "../../context/CadastroUsuario";
+import { useEffect } from "react";
 
 const estadosBrasileiros = [
     { "text": "Acre", "value": "AC" },
@@ -47,12 +48,25 @@ const DadosPessoais = () => {
         setSenha, 
         setSenhaConfirmada, 
         setUf, 
-        submeterUsuario
+        submeterUsuario,
+        possoCadastrarDadosPessoais
     } = useCadastroUsuarioContext();
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // enquanto possoSelecionarInteresse não retornar true, navega de volta para a página de cadastro, já que o perfil ainda não foi selecionado. 
+        if(!possoCadastrarDadosPessoais()) {
+            navigate('/cadastro');
+        }
+    }, [navigate, possoCadastrarDadosPessoais])
 
     const finalizarCadastro = (e) => {
         e.preventDefault();
-        submeterUsuario();
+        if(!!submeterUsuario()) {
+            alert(submeterUsuario())
+        }
+        // submeterUsuario();
     }
     
     return (

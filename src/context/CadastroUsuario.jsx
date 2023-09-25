@@ -12,11 +12,17 @@ const usuarioInicial = {
     senhaConfirmada: ''
 }
 
+const erros = {
+    nomeErro: 'Insira um nome válido.',
+    ufErro: 'Selecione um estado válida.',
+    cidadeErro: 'Insira uma cidade válida.',
+    senhaErro: 'Sua senha deve conter 8 ou mais caracteres.',
+    senhaConfirmadaErro: 'As duas senhas não são as mesmas.'
+}
+
 export const CadastroUsuarioContext = createContext({
     usuario: usuarioInicial,
-    erros: {
-        senhaErro: ''
-    },
+    erro: erros,
     setPerfil: () => null,
     setInteresse: () => null,
     setNomeCompleto: () => null,
@@ -26,7 +32,8 @@ export const CadastroUsuarioContext = createContext({
     setSenha: () => null,
     setSenhaConfirmada: () => null,
     submeterUsuario: () => null,
-    possoSelecionarInteresse: () => null
+    possoSelecionarInteresse: () => null,
+    possoCadastrarDadosPessoais: () => null
 });
 
 export const useCadastroUsuarioContext = () => {
@@ -105,8 +112,20 @@ export const CadastroUsuarioProvider = ({ children }) => {
         })
     }
     const submeterUsuario = () => {
+        if (usuario.nome === '') {
+            return erros.nomeErro
+        }
+        if (!usuario.cidade === '') {
+            return erros.cidadeErro
+        }
+        if (!usuario.uf) {
+            return erros.ufErro
+        }
         if (usuario.senha.length < 8) {
-            return
+            return erros.senhaErro
+        }
+        if (usuario.senhaConfirmada !== usuario.senha) {
+            return erros.senhaConfirmadaErro
         }
         console.log(usuario);
         navigate('/cadastro/concluido');
@@ -114,6 +133,11 @@ export const CadastroUsuarioProvider = ({ children }) => {
     const possoSelecionarInteresse = () => {
         // se o usuario.perfil for uma string vazia (undefined), retorna false. Caso contrário, retorna true. 
         return !!usuario.perfil
+    }
+
+    const possoCadastrarDadosPessoais = () => {
+        // se o usuario.interesse for uma string vazia (undefined), retorna false. Caso contrário, retorna true. 
+        return !!usuario.interesse
     }
 
     const context = {
@@ -127,7 +151,8 @@ export const CadastroUsuarioProvider = ({ children }) => {
         setSenha,
         setSenhaConfirmada,
         submeterUsuario,
-        possoSelecionarInteresse
+        possoSelecionarInteresse,
+        possoCadastrarDadosPessoais
     }
     return (
         <CadastroUsuarioContext.Provider value={context}>
